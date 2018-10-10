@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="add.employee.add" template="/WEB-INF/tiles/admin-timplate.jsp">
+		<put-attribute name="nav" value="/WEB-INF/views/admin/nav.jsp"/>
+		<put-attribute name="left" value="/WEB-INF/views/admin/side.jsp"/>
+		<put-attribute name="center" value="/WEB-INF/views/admin/addEmployee.jsp"/>
+	</definition>
+</tiles-definitions>
