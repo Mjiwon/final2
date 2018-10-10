@@ -11,6 +11,10 @@ public class EmployeeDAO {
 	@Autowired
 	SqlSessionTemplate template;
 	
+	public int addEmployee(Map param) {
+		return template.insert("admin.addEmployee",param);
+	}
+	
 	public String getSequenceVal() {
 		Integer i = template.selectOne("admin.getSequenceVal");
 		String id = "em"+i;

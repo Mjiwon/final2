@@ -6,4 +6,16 @@
 		<put-attribute name="left" value="/WEB-INF/views/admin/side.jsp"/>
 		<put-attribute name="center" value="/WEB-INF/views/admin/addEmployee.jsp"/>
 	</definition>
+	
+	<definition name="add.employee.joinComplete" template="/WEB-INF/tiles/admin-timplate.jsp">
+		<put-attribute name="nav" value="/WEB-INF/views/admin/nav.jsp"/>
+		<put-attribute name="left" value="/WEB-INF/views/admin/side.jsp"/>
+		<put-attribute name="center" value="/WEB-INF/views/admin/joinComplete.jsp"/>
+	</definition>
+	
+	<definition name="add.employee.error" template="/WEB-INF/tiles/admin-timplate.jsp">
+		<put-attribute name="nav" value="/WEB-INF/views/admin/nav.jsp"/>
+		<put-attribute name="left" value="/WEB-INF/views/admin/side.jsp"/>
+		<put-attribute name="center" value="/WEB-INF/views/admin/error.jsp"/>
+	</definition>
 </tiles-definitions>
