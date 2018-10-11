@@ -40,11 +40,8 @@ public class SocketController extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String payload = message.getPayload();
 		System.out.println("handleTextMessage : " + payload);
-
-	/*	TextMessage msg = new TextMessage(gson.toJson(data));
-		session.sendMessage(msg);
-		System.out.println(data);
-*/		
+		
+		service.sendAll(payload);
 	}
 	
 }

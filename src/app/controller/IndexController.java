@@ -30,9 +30,7 @@ public class IndexController {
 			return "guest";
 		}else {
 			Map datas = (Map)wr.getAttribute("user", WebRequest.SCOPE_SESSION);
-			System.out.println("로그인 정보" + datas);
 			String data = gson.toJson(datas);
-			System.out.println(data);
 			service.sendAll(data);
 			
 			return "employee.home";

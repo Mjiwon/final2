@@ -28,11 +28,9 @@ public class LoginController {
 		if(map!=null) {
 			wr.setAttribute("auth", "on", WebRequest.SCOPE_SESSION);
 			String id = (String)param.get("id");
-			System.out.println("id입니다 " +id);
 			
 			Map data = adao.loginMember(id);
 			data.put("mode", "login");
-			System.out.println(data);
 			
 			wr.setAttribute("user", data, WebRequest.SCOPE_SESSION);
 		}else {
