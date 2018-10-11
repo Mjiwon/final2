@@ -17,7 +17,7 @@ public class AccountDao {
 	}
 	
 
-	public List<Map> loginMember(String id){
-		return template.selectList("account.loginMember",id);
+	public Map loginMember(String id){
+		return template.selectOne("account.loginMemver",id);
 	}
 }

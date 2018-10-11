@@ -1,5 +1,6 @@
 package app.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,19 @@ public class LoginController {
 	@RequestMapping("/login.do")
 	public String loginHandler(@RequestParam Map param, WebRequest wr) {
 		Map map = adao.logConfirm(param);
-		System.out.println(map);
+		
 		if(map!=null) {
 			wr.setAttribute("auth", "on", WebRequest.SCOPE_SESSION);
+			String id = (String)param.get("id");
+			System.out.println("id입니다 " +id);
+			
+			Map data = adao.loginMember(id);
+			data.put("mode", "login");
+			System.out.println(data);
+			
+			wr.setAttribute("user", data, WebRequest.SCOPE_SESSION);
 		}else {
 			wr.setAttribute("err", "err", WebRequest.SCOPE_SESSION);
-			map.put("mode", "login");
-			service.sendAll(map);
 		}
 		return "redirect:/index.do";
 		

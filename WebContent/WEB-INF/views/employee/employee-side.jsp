@@ -76,18 +76,24 @@
                 </a>
               </li>
             </ul>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert">
+
+		</div>
           </div>
         </nav>
-        <span></span>
         <script>
         	var ws = new WebSocket("ws://"+ location.host +"${pageContext.servletContext.contextPath}/relay.do");
         	
         	ws.onmessage = function(got){
         		var obj = JSON.parse(got.data);
-        		
+        		console.log(obj);
         		switch(obj.mode){
         		case "login":
-        			
+        			var html = "<strong>로그인 알림</strong><br/>"
+        			html+= obj.NAME + " "+obj.PNAME +"("+obj.DNAME+")"
+        			html+=
+        				"<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"> <span aria-hidden=\"true\">&times;</span></button>";
+        			document.getElementById("alert").innerHTML = html;
         			break;
         		}
         		

@@ -26,7 +26,6 @@ public class SocketController extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		service.addSocket(session);
-		
 		Map data = new HashMap();
 		data.put("mode", "welcome");
 		service.sendAll(data);
@@ -41,6 +40,11 @@ public class SocketController extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String payload = message.getPayload();
 		System.out.println("handleTextMessage : " + payload);
+
+	/*	TextMessage msg = new TextMessage(gson.toJson(data));
+		session.sendMessage(msg);
+		System.out.println(data);
+*/		
 	}
 	
 }

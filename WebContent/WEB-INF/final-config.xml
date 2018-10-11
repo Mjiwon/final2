@@ -46,9 +46,10 @@
 			ref="sqlSessionFactory" />
 	</bean>
 	
-	
 	<websocket:handlers>
 		<websocket:mapping handler="socketController" path="/relay.do"/>
 	</websocket:handlers>
+
+	<bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 
 </beans>

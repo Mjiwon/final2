@@ -4,8 +4,8 @@
 	<select id="logConfirm" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		select*from employee where id = #{id} and pass = #{pass}
 	</select>
-	<select id="loginMemver" resultType="java.lang.String" parameterType="java.util.HashMap">
-		elect * from (employee join department on employee.did=department.did  join position on employee.pid=position.pid) where  id = #{id}
+	<select id="loginMemver" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select * from (employee join department on employee.did=department.did  join position on employee.pid=position.pid) where  id = #{id}
 	</select>
 	<!-- 지원 필기 
 		select*from employee join department on employee.did=department.did  join position on employee.pid=position.pid 
