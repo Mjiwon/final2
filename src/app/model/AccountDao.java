@@ -12,8 +12,8 @@ public class AccountDao {
 	@Autowired
 	SqlSessionTemplate template;
 	
-	public Map memberConfirm(Map param) {
-		return template.selectOne("account.memberConfirm",param);
+	public Map logConfirm(Map param) {
+		return template.selectOne("account.logConfirm",param);
 	}
 	
 
