@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="account">
+	<select id="memberConfirm" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		select*from employee where id = #{id} and pass = #{pass}
+	</select>
+	<select id="loginMemver" resultType="java.lang.String" parameterType="java.util.HashMap">
+		elect * from (employee join department on employee.did=department.did  join position on employee.pid=position.pid) where  id = #{id}
+	</select>
+	<!-- 지원 필기 
+		select*from employee join department on employee.did=department.did  join position on employee.pid=position.pid 
+		select * from (employee join department on employee.did=department.did  join position on employee.pid=position.pid) where  id = 'em1023'  - 로그인할 때 사용하면 될 듯
+	-->
+</mapper> 

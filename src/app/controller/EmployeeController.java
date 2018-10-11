@@ -23,26 +23,28 @@ public class EmployeeController {
 	public String addController(ModelMap modelMap) {
 		modelMap.put("department", edao.getDepartment());
 		modelMap.put("position", edao.getPosition());
-		return "add.employee.add";
+		return "admin.employee.add";
 	}
 	
 	@PostMapping("add.do")
 	public String addController(@RequestParam Map param , ModelMap modelMap) {
 		String id = edao.getSequenceVal();
 		param.put("id", id);
-		param.put("pass", 1111);
-		System.out.println(param);
 		
-		int i = edao.addEmployee(param);
-		
-		modelMap.put("employee",param);
-		
-		System.out.println(i);
-		System.out.println(modelMap);
-		if(i==1) {
-			return "add.employee.joinComplete";			
-		}else {
-			return "add.employee.error";
+		try {
+			int i = edao.addEmployee(param);
+			System.out.println("EmployeeController 36번줄 [회원등록 성공]");
+			modelMap.put("employee",param);
+			return "admin.employee.joinComplete";	
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("EmployeeController 42번줄 [회원등록 실패]");
+			modelMap.put("err", "on");
+			modelMap.put("department", edao.getDepartment());
+			modelMap.put("position", edao.getPosition());
+			return "admin.employee.add";			
 		}
+		
 	}
 }
