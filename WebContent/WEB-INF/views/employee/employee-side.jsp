@@ -4,13 +4,13 @@
 <div class="sidebar-sticky">
 	<ul class="nav flex-column">
 		<li class="nav-item"><a class="nav-link active" href="#"> <span
-				data-feather="home"></span> Dashboard <span class="sr-only">(current)</span>
+				data-feather="home"></span> 나의정보 <span class="sr-only">(current)</span>
 		</a></li>
 		<li class="nav-item"><a class="nav-link" href="#"> <span
-				data-feather="file"></span> Orders
+				data-feather="file"></span> 쪽지함
 		</a></li>
 		<li class="nav-item"><a class="nav-link" href="#"> <span
-				data-feather="shopping-cart"></span> Products
+				data-feather="shopping-cart"></span> 게시판
 		</a></li>
 		<li class="nav-item"><a class="nav-link" href="#"> <span
 				data-feather="users"></span> Customers
@@ -52,8 +52,10 @@
 		case "login":
 			loginAlertHandle(obj);
 			break;
+		case "doubleLogin" :
+			doubleLoginHandle(obj);
+			break;
 		}
-
 	};
 
 	var loginAlertHandle = function(obj) {
@@ -65,5 +67,17 @@
 		html += "</div>";
 
 		document.getElementById("alert").innerHTML += html;
-	}
+	};
+	
+	var doubleLoginHandle = function(obj){
+		var html =
+			"<div class=\"alert alert alert-success alert-dismissible fade show\" role=\"alert\">";
+		html +="<strong>중복로그인</strong> <br/>다른 컴퓨터에서 로그인되었습니다.<br/>";
+		html += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">";
+		html += "<span aria-hidden=\"true\">&times;</span>";
+		html += "</button>";
+		html += "</div>";
+		document.getElementById("alert").innerHTML += html;
+		document.getElementById("alert").id= "";
+	};
 </script>

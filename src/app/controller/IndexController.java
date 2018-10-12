@@ -36,11 +36,10 @@ public class IndexController {
 	}*/
 	
 	@RequestMapping("/index.do")
-	public String indexHandle(@SessionAttribute(required=false)String auth, Map attr) {
+	public String indexHandle(@SessionAttribute(required=false)String auth) {
 		if(auth==null) {
 			return "guest";
 		}else {
-			
 			return "employee.home";	
 		}
 	}
