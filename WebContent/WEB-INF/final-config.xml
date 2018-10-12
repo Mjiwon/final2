@@ -46,10 +46,14 @@
 			ref="sqlSessionFactory" />
 	</bean>
 	
+	<!-- 50~53번 한세트 -->
 	<websocket:handlers>
 		<websocket:mapping handler="socketController" path="/relay.do"/>
+		<websocket:handshake-interceptors>
+			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
 	</websocket:handlers>
-
+	
 	<bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
-
+	
 </beans>

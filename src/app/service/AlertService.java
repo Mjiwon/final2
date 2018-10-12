@@ -1,4 +1,4 @@
-package app.model;
+package app.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,5 +49,35 @@ public class AlertService {
 	
 	public void sendAll(Map map) {
 		sendAll(gson.toJson(map));
+	}
+	
+	public void sendOne(String txt , String target) {
+		TextMessage msg = new TextMessage(txt);
+		for(int i=0; i<list.size(); i++) {
+			try {
+				WebSocketSession ws = list.get(i);
+				String userId = (String)ws.getAttributes().get("userId");
+				// ws.getAttribute() == HttpSession의 attribute 들
+				if(userId.equals(target)) {
+					ws.sendMessage(msg);
+				}
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void sendOne(Map data , String target) {
+		sendOne(gson.toJson(data),target);
+	}
+	
+	// 그룹채팅을 위해 만들으삼
+	public void sendSome(String txt, String...target) {
+		TextMessage msg = new TextMessage(txt);
+		
+		for(int i=0; i<list.size(); i++) {
+			
+		}
 	}
 }

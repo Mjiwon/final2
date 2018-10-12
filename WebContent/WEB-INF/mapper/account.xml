@@ -4,6 +4,11 @@
 	<select id="logConfirm" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		select*from employee where id = #{id} and pass = #{pass}
 	</select>
+	
+	<select id="logConfirms" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+		select count(*) from employee where id=#{id } and pass=#{pass}
+	</select>
+	
 	<select id="loginMemver" resultType="java.util.HashMap" parameterType="java.lang.String">
 		select * from (employee join department on employee.did=department.did  join position on employee.pid=position.pid) where  id = #{id}
 	</select>

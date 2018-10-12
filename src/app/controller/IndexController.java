@@ -6,12 +6,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.context.request.WebRequest;
 
 import com.google.gson.Gson;
 
 import app.model.AccountDao;
-import app.model.AlertService;
+import app.service.AlertService;
 
 @Controller
 public class IndexController {
@@ -24,16 +25,23 @@ public class IndexController {
 	@Autowired
 	AlertService service;
 	
-	@RequestMapping("/index.do")
+/*	@RequestMapping("/index.do")
 	public String indexHandle(WebRequest wr) {
 		if(wr.getAttribute("auth", WebRequest.SCOPE_SESSION)==null) {
 			return "guest";
 		}else {
-			Map datas = (Map)wr.getAttribute("user", WebRequest.SCOPE_SESSION);
-			String data = gson.toJson(datas);
-			service.sendAll(data);
 			
-			return "employee.home";
+			return "employee.home";	
+		}
+	}*/
+	
+	@RequestMapping("/index.do")
+	public String indexHandle(@SessionAttribute(required=false)String auth, Map attr) {
+		if(auth==null) {
+			return "guest";
+		}else {
+			
+			return "employee.home";	
 		}
 	}
 }

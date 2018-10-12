@@ -16,6 +16,10 @@ public class AccountDao {
 		return template.selectOne("account.logConfirm",param);
 	}
 	
+	public int logConfirms(Map param) {
+		return template.selectOne("account.logConfirms",param);
+	}
+	
 
 	public Map loginMember(String id){
 		return template.selectOne("account.loginMemver",id);

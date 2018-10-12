@@ -12,7 +12,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.google.gson.Gson;
 
-import app.model.AlertService;
+import app.service.AlertService;
 
 @Controller
 public class SocketController extends TextWebSocketHandler{
@@ -26,9 +26,9 @@ public class SocketController extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		service.addSocket(session);
-		Map data = new HashMap();
-		data.put("mode", "welcome");
-		service.sendAll(data);
+		Map<String, Object> attrs = session.getAttributes();
+		
+		System.out.println(session.getId() + " / " +attrs);
 	}
 	
 	@Override
@@ -36,12 +36,12 @@ public class SocketController extends TextWebSocketHandler{
 		service.removeSocket(session);
 	}
 	
-	@Override
+/*	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String payload = message.getPayload();
 		System.out.println("handleTextMessage : " + payload);
 		
 		service.sendAll(payload);
-	}
+	}*/
 	
 }
