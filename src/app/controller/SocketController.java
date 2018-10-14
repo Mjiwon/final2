@@ -26,10 +26,8 @@ public class SocketController extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		service.addSocket(session);
-		Map<String, Object> attrs = session.getAttributes();	// 	
-		// 이 기능을 사용하는 방법을 알아야 한다
-		System.out.println(session.getId() + " / " + attrs);	// HttpSession 이 아니다.
-		
+		Map<String, Object> attrs = session.getAttributes();	
+	
 	}
 	
 	@Override

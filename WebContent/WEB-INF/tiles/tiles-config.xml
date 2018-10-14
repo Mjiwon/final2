@@ -32,5 +32,17 @@
 		<put-attribute name="center"
 			value="/WEB-INF/views/employee/home.jsp" />
 	</definition>
+	
+	<definition name="employee.changpass" template="/WEB-INF/tiles/employee-timplate.jsp">
+		<put-attribute name="nav" value="/WEB-INF/views/employee/employee-nav.jsp" />
+		<put-attribute name="left" value="/WEB-INF/views/employee/employee-side.jsp" />
+		<put-attribute name="center" value="/WEB-INF/views/employee/changpass.jsp"/>
+	</definition>
+	
+	<definition name="message.home" template="/WEB-INF/tiles/employee-timplate.jsp">
+		<put-attribute name="nav" value="/WEB-INF/views/employee/employee-nav.jsp" />
+		<put-attribute name="left" value="/WEB-INF/views/employee/employee-side.jsp" />
+		<put-attribute name="center" value="/WEB-INF/views/message/messagehome.jsp"/>
+	</definition>
 
 </tiles-definitions>

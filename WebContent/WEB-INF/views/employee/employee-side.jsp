@@ -3,10 +3,10 @@
 
 <div class="sidebar-sticky">
 	<ul class="nav flex-column">
-		<li class="nav-item"><a class="nav-link active" href="#"> <span
+		<li class="nav-item"><a class="nav-link active" href="${pageContext.servletContext.contextPath }/index.do"> <span
 				data-feather="home"></span> 나의정보 <span class="sr-only">(current)</span>
 		</a></li>
-		<li class="nav-item"><a class="nav-link" href="#"> <span
+		<li class="nav-item"><a class="nav-link" href="${pageContext.servletContext.contextPath }/messagehome.do"> <span
 				data-feather="file"></span> 쪽지함
 		</a></li>
 		<li class="nav-item"><a class="nav-link" href="#"> <span
@@ -55,6 +55,8 @@
 		case "doubleLogin" :
 			doubleLoginHandle(obj);
 			break;
+		case "changPass" :
+			changPassHandle(obj);
 		}
 	};
 
@@ -80,4 +82,5 @@
 		document.getElementById("alert").innerHTML += html;
 		document.getElementById("alert").id= "";
 	};
+	
 </script>

@@ -24,4 +24,8 @@ public class AccountDao {
 	public Map loginMember(String id){
 		return template.selectOne("account.loginMemver",id);
 	}
+	
+	public int changPass(Map map) {
+		return template.update("account.changPass",map);
+	}
 }
