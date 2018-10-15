@@ -28,4 +28,8 @@ public class AccountDao {
 	public int changPass(Map map) {
 		return template.update("account.changPass",map);
 	}
+	
+	public List<Map> allMember(){
+		return template.selectList("account.allMember");
+	}
 }

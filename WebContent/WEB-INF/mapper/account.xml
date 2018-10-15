@@ -16,6 +16,9 @@
 		select*from employee join department on employee.did=department.did  join position on employee.pid=position.pid 
 		select * from (employee join department on employee.did=department.did  join position on employee.pid=position.pid) where  id = 'em1023'  - 로그인할 때 사용하면 될 듯
 	-->
+	<select id="allMember" resultType="java.util.HashMap">
+	select * from (employee join department on employee.did=department.did  join position on employee.pid=position.pid) order by dname ASC
+	</select>
 	
 	<update id="changPass" parameterType="java.util.HashMap">
 		update employee set pass = #{pass} where id =#{id}

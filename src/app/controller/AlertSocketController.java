@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import app.service.AlertService;
 
 @Controller
-public class SocketController extends TextWebSocketHandler{
+public class AlertSocketController extends TextWebSocketHandler{
 	
 	@Autowired
 	Gson gson;

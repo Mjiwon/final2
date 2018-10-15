@@ -44,5 +44,17 @@
 		<put-attribute name="left" value="/WEB-INF/views/employee/employee-side.jsp" />
 		<put-attribute name="center" value="/WEB-INF/views/message/messagehome.jsp"/>
 	</definition>
+	
+	<definition name="message.send" template="/WEB-INF/tiles/employee-timplate.jsp">
+		<put-attribute name="nav" value="/WEB-INF/views/employee/employee-nav.jsp" />
+		<put-attribute name="left" value="/WEB-INF/views/employee/employee-side.jsp" />
+		<put-attribute name="center" value="/WEB-INF/views/message/sendmessage.jsp"/>
+	</definition>
+	
+	<definition name="guest.chat" template="/WEB-INF/tiles/employee-timplate.jsp">
+		<put-attribute name="nav" value="/WEB-INF/views/employee/employee-nav.jsp" />
+		<put-attribute name="left" value="/WEB-INF/views/employee/employee-side.jsp" />
+		<put-attribute name="center" value="/WEB-INF/views/chat/room.jsp"/>
+	</definition>
 
 </tiles-definitions>

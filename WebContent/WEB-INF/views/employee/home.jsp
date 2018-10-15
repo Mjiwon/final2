@@ -15,6 +15,7 @@
 	<br>
 </p>
 <h3>나의 정보</h3>
+<hr/>
 <form>
 	<div class="form-row">
 		<div class="col-5">

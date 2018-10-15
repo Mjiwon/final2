@@ -55,8 +55,12 @@
 		case "doubleLogin" :
 			doubleLoginHandle(obj);
 			break;
-		case "changPass" :
-			changPassHandle(obj);
+		case "remsg" :
+			receiverMsgHandle(obj);
+			break;
+		case "public" :
+			publicHandle(obj);
+			break;
 		}
 	};
 
@@ -73,7 +77,7 @@
 	
 	var doubleLoginHandle = function(obj){
 		var html =
-			"<div class=\"alert alert alert-success alert-dismissible fade show\" role=\"alert\">";
+			"<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">";
 		html +="<strong>중복로그인</strong> <br/>다른 컴퓨터에서 로그인되었습니다.<br/>";
 		html += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">";
 		html += "<span aria-hidden=\"true\">&times;</span>";
@@ -82,5 +86,17 @@
 		document.getElementById("alert").innerHTML += html;
 		document.getElementById("alert").id= "";
 	};
+	
+	var receiverMsgHandle = function(obj){
+		console.log(obj);
+		var html = "<div class=\"alert alert-info alert-dismissible fade show\" role=\"alert\">";
+		html += "<strong>로그인</strong><br/>" + obj.receiverMsg.NAME + " " + obj.receiverMsg.PNAME + "("
+				+ obj.receiverMsg. nDNAME + ")으로부터 메세지가 도착했습니다."
+		html += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">";
+		html += "<span aria-hidden=\"true\">&times;</span>";
+		html += "</div>";
+
+		document.getElementById("alert").innerHTML += html;
+	}
 	
 </script>

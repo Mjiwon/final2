@@ -1,12 +1,13 @@
 package app.controller;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
@@ -54,5 +55,15 @@ public class AccountController {
 			return "employee.changpass";	
 		}
 	}
+	
+/*	@RequestMapping("/allmember.do")
+	public String allmemberHander(WebRequest wr){
+		List<Map> memberList = adao.allMember();
+		wr.setAttribute("allmember", memberList, WebRequest.SCOPE_SESSION);
+		System.out.println(memberList);
+		return "message.send;";
+	}*/
+	
+	
 	
 }

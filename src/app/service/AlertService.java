@@ -28,6 +28,10 @@ public class AlertService {
 		return list.size();
 	}
 	
+	public List<WebSocketSession> alertList() {
+		return list;
+	}
+	
 	public boolean addSocket(WebSocketSession target) {
 		return list.add(target);
 	}

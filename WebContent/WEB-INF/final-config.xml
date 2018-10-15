@@ -48,7 +48,8 @@
 	
 	<!-- 50~53번 한세트 -->
 	<websocket:handlers>
-		<websocket:mapping handler="socketController" path="/relay.do"/>
+		<websocket:mapping handler="alertSocketController" path="/relay.do"/>
+		<websocket:mapping handler="chatSocketController" path="/chat.do"/>
 		<websocket:handshake-interceptors>
 			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
 		</websocket:handshake-interceptors>
