@@ -13,4 +13,9 @@ public class ChatController {
 		return "guest.chat";
 	}
 	
+	@RequestMapping("/timRoom.do")
+	public String chatTimRoomHandler() {
+		return "guest.timRoom";
+	}
+	
 }

@@ -31,5 +31,6 @@ public class MessageDao {
 	public int receiverDate(String code) {
 		return template.update("messages.receiverDate",code);
 	}
+	
 
 }

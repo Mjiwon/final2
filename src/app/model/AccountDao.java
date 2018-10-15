@@ -22,7 +22,7 @@ public class AccountDao {
 	
 
 	public Map loginMember(String id){
-		return template.selectOne("account.loginMemver",id);
+		return template.selectOne("account.loginMember",id);
 	}
 	
 	public int changPass(Map map) {

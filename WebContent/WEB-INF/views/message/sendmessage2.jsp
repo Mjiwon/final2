@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <p>
 <br/>
 </p>
-<h3>쪽지함</h3>
-<hr/>
+<h3>쪽지보내기</h3>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -35,23 +33,38 @@
     </form>
   </div>
 </nav>
-
-<ul class="list-group">
-	<ul class="list-group">
-	<c:forEach var="msg" items="${messageList }">
-		<li class="list-group-item d-flex justify-content-between align-items-center"><a href="${pageContext.servletContext.contextPath }/msgdetail.do?code=${msg.CODE }"><font style="color: black;">[ ${msg.NAME }${msg.PNAME }-${msg.DNAME } ]</font> &nbsp; 제목 : ${msg.REP } </a>
-		
- 		<fmt:formatDate value="${msg.RECEIVEDATE}" pattern="yyyy-MM-dd HH:mm:ss" var="date"/>
- 		<c:choose>
-	 		<c:when test="${date == null}">
-				<span class="badge badge-primary badge-pill">안읽음</span>
-			</c:when>
-			<c:otherwise>
-				<span class="badge badge-danger">읽음</span>
-			</c:otherwise>
-		</c:choose> 
-		 </li>
-	</c:forEach>
-	</ul>	
-
-</ul>	
+<form action="${pageContext.servletContext.contextPath }/messagesend.do" method="post">
+	<div class="form-group">
+		<label>보내는 사람</label> 
+		<input type="user" class="form-control"
+			placeholder="${user.NAME }${user.PNAME }(${user.ID })-${user.DNAME}">
+	</div>
+	<div class="form-group">
+		<label>받는사람</label> 
+		<input type="user" class="form-control"
+			placeholder="${reSend.NAME }${reSend.PNAME}(${reSend.ID })-${reSend.DNAME}">
+<%-- 		<select class="form-control"
+			id="exampleFormControlSelect1" name="receiver">
+			<c:forEach var="i" items="${allmember }">
+				<option value="${i.ID}">${i.NAME}${i.PNAME }(${i.ID })-${i.DNAME } </option>
+			
+			</c:forEach>
+		</select> --%>
+		<script>
+/* 			var allmember= function(){
+				var req = new XMLHttpRequest();
+				req.open("get", "${pageContext.servletContext.contextPath}/allmember.do", true);
+				req.onreadystatechange = function(){
+					if(this.readyState == 4 )
+						var obj = JSON.parser
+				}
+			} */
+		</script>
+	</div>
+	<div class="form-group">
+		<label for="exampleFormControlTextarea1">보내는 내용</label>
+		<textarea class="form-control" id="exampleFormControlTextarea1"
+			rows="3" name="content"></textarea>
+	</div>
+	<button type="submit" class="btn btn-info">보내기</button>
+</form>

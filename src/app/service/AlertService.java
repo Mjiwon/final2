@@ -80,8 +80,17 @@ public class AlertService {
 	public void sendSome(String txt, String...target) {
 		TextMessage msg = new TextMessage(txt);
 		
-		for(int i=0; i<list.size(); i++) {
-			
+		for(int i=0; i<target.length; i++) {
+			try {
+				WebSocketSession ws = list.get(i);
+				String userId = (String)ws.getAttributes().get("userId");
+				if(target[i].contains(userId)) {
+					ws.sendMessage(msg);
+				}
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

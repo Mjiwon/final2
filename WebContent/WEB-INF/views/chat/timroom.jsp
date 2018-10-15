@@ -3,7 +3,7 @@
 <p>
 <br/>
 </p>
-<h4>Chat Room <small>(All Departments)</small></h4>
+<h4>Chat Room <small>(${user.DNAME })</small></h4>
 <div style="height: 520px; overflow-y: scroll; " id="chatView">
 	
 </div>
@@ -15,18 +15,18 @@
   	id="input" >
 </div>
 <script>
-	var chatws = new WebSocket("ws://"+ location.host + "${pageContext.servletContext.contextPath}/chat.do");
+	var chatws = new WebSocket("ws://"+ location.host + "${pageContext.servletContext.contextPath}/timchat.do");
 	chatws.onmessage = function(evt){
 		console.log(evt.data);
 		var obj = JSON.parse(evt.data);
 		switch(obj.mode){
-		case "public":
-			publicHandle(obj);
+		case "timChat":
+			timChatHandle(obj);
 			break;
 		}
 	};
 	
-	var publicHandle = function(obj){
+	var timChatHandle = function(obj){
 		var txt = obj.text;
 		var name = obj.sendUser.NAME;
 		var pname = obj.sendUser.PNAME;
@@ -42,7 +42,7 @@
 	document.getElementById("input").onchange = function(){
 		console.log(this.value);
 		var msg = {
-			"mode" : "public",
+			"mode" : "timChat",
 			"text" : this.value
 		};
 		chatws.send(JSON.stringify(msg));

@@ -34,6 +34,16 @@ public class MessageController {
 		System.out.println("id는 " + id);
 		List<Map> messageList = mdao.messageList(id);
 		System.out.println(messageList);
+
+		for(int i = 0; i<messageList.size();i++) {
+			Map m = messageList.get(i);
+			String ctr = (String)m.get("CONTENT");
+			if(ctr.contains("\n")) {
+				m.put("REP", ctr.substring(0,ctr.indexOf("\n")));
+			}else {
+				m.put("REP", ctr);
+			}
+		}
 		wr.setAttribute("messageList", messageList, WebRequest.SCOPE_SESSION);
 		return "message.home";
 	}
@@ -69,6 +79,17 @@ public class MessageController {
 		return "message.home";
 	}
 	
+	@RequestMapping("/sendmessge2.do")
+	public String msgSendController(WebRequest wr) {
+		Map msg = (Map)wr.getAttribute("msgDetail", WebRequest.SCOPE_SESSION);
+
+		wr.setAttribute("reSend", msg, WebRequest.SCOPE_SESSION);
+		return "message.send2";
+	}
+	
+
+	
+	
 	@RequestMapping("/msgdetail.do")
 	public String msgDetail(@RequestParam String code, WebRequest wr ) {
 		System.out.println("code" + code);
@@ -76,6 +97,16 @@ public class MessageController {
 		System.out.println("ㅡㄷㄴㄴㅁㅎㄷㄴ" +messages);
 		int i = mdao.receiverDate(code);
 		System.out.println(i);
+		
+
+		String ctr = (String)messages.get("CONTENT");
+		if(ctr.contains("\n")) {
+			messages.put("REP", ctr.substring(0,ctr.indexOf("\n")));
+		}else {
+			messages.put("REP", ctr);
+		}
+
+		
 		wr.setAttribute("msgDetail", messages, WebRequest.SCOPE_SESSION);
 		
 		return "message.detail";

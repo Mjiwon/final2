@@ -14,21 +14,18 @@
 		</a></li>
 		<li class="nav-item"><a class="nav-link" href="${pageContext.servletContext.contextPath }/chat/room.do"> <span
 				data-feather="users" ></span> 채팅방 <span id="newChat"></span>
-				<!-- <div id="newChat" >
-					
-				</div> -->
 		</a></li>
 	</ul>
 	<h6
 		class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-		<span>Saved reports</span> <a
+		<span>${user.DNAME}</span> <a
 			class="d-flex align-items-center text-muted" href="#"> <span
 			data-feather="plus-circle"></span>
 		</a>
 	</h6>
 	<ul class="nav flex-column mb-2">
-		<li class="nav-item"><a class="nav-link" href="#"> <span
-				data-feather="file-text"></span> Current month
+		<li class="nav-item"><a class="nav-link" href="${pageContext.servletContext.contextPath }/chat/timRoom.do"> <span
+				data-feather="file-text"></span> 부서채팅방 <span id="newTimChat"></span>
 		</a></li>
 		<li class="nav-item"><a class="nav-link" href="#"> <span
 				data-feather="file-text"></span> Last quarter
@@ -64,6 +61,9 @@
 		case "public" :
 			publicHandle(obj);
 			break;
+		case "timChat":
+			timChatHandle(obj);
+			break;
 		}
 	};
 
@@ -93,7 +93,7 @@
 	var receiverMsgHandle = function(obj){
 		console.log(obj);
 		var html = "<div class=\"alert alert-info alert-dismissible fade show\" role=\"alert\">";
-		html += "<strong>로그인</strong><br/>" + obj.receiverMsg.NAME + " " + obj.receiverMsg.PNAME + "("
+		html += "<strong>쪽지알림</strong><br/>" + obj.receiverMsg.NAME + " " + obj.receiverMsg.PNAME + "("
 				+ obj.receiverMsg. nDNAME + ")으로부터 메세지가 도착했습니다."
 		html += "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">";
 		html += "<span aria-hidden=\"true\">&times;</span>";
@@ -108,6 +108,15 @@
 		html += "</span>";
 		
 		document.getElementById("newChat").innerHTML = html;
+		
+	};
+	
+	var timChatHandle = function(obj){
+		console.log(obj);
+		var html = "<span class=\"badge badge-primary\"> new";
+		html += "</span>";
+		
+		document.getElementById("newTimChat").innerHTML = html;
 		
 	};
 	
