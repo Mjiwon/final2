@@ -37,7 +37,16 @@
 <ul class="list-group">
 	<ul class="list-group">
 	<c:forEach var="msg" items="${messageList }">
-		<li class="list-group-item d-flex justify-content-between align-items-center"><a href="${pageContext.servletContext.contextPath }/messagesend.do?code="+${msg.CODE }>${msg.NAME }${msg.PNAME }-${msg.DNAME }</a><span class="badge badge-primary badge-pill">${msg.RECEIVERDATE ==null?  "안읽음":"읽음"}</span> </li>
+		<li class="list-group-item d-flex justify-content-between align-items-center"><a href="${pageContext.servletContext.contextPath }/msgdetail.do?code=${msg.CODE }">${msg.NAME }${msg.PNAME }-${msg.DNAME }</a>
+ 		<c:choose>
+	 		<c:when test="${msg.RECEIVEDATE == null}">
+				<span class="badge badge-primary badge-pill">안읽음</span>
+			</c:when>
+			<c:otherwise>
+				<span class="badge badge-danger">읽음</span>
+			</c:otherwise>
+		</c:choose> 
+		 </li>
 	</c:forEach>
 	</ul>	
 

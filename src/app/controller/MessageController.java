@@ -70,9 +70,14 @@ public class MessageController {
 	}
 	
 	@RequestMapping("/msgdetail.do")
-	public String msgDetail(String code) {
-		Map messages = mdao.receiverMsg(code);
-		int i = mdao.receiverDate();
+	public String msgDetail(@RequestParam String code, WebRequest wr ) {
+		System.out.println("code" + code);
+		Map messages = mdao.msgdetail(code);
+		System.out.println("ㅡㄷㄴㄴㅁㅎㄷㄴ" +messages);
+		int i = mdao.receiverDate(code);
+		System.out.println(i);
+		wr.setAttribute("msgDetail", messages, WebRequest.SCOPE_SESSION);
+		
 		return "message.detail";
 	}
 }

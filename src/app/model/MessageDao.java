@@ -25,11 +25,11 @@ public class MessageDao {
 	}
 	
 	public Map msgdetail(String code) {
-		return template.selectOne("messages.receiverMsg",code);
+		return template.selectOne("messages.msgdetail",code);
 	}
 	
-	public int receiverDate() {
-		return template.update("messages.receiverDate");
+	public int receiverDate(String code) {
+		return template.update("messages.receiverDate",code);
 	}
 
 }

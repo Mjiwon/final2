@@ -12,8 +12,11 @@
 		<li class="nav-item"><a class="nav-link" href="#"> <span
 				data-feather="shopping-cart"></span> 게시판
 		</a></li>
-		<li class="nav-item"><a class="nav-link" href="#"> <span
-				data-feather="users"></span> Customers
+		<li class="nav-item"><a class="nav-link" href="${pageContext.servletContext.contextPath }/chat/room.do"> <span
+				data-feather="users" ></span> 채팅방 <span id="newChat"></span>
+				<!-- <div id="newChat" >
+					
+				</div> -->
 		</a></li>
 	</ul>
 	<h6
@@ -97,6 +100,15 @@
 		html += "</div>";
 
 		document.getElementById("alert").innerHTML += html;
-	}
+	};
+	
+	var publicHandle = function(obj){
+		console.log(obj);
+		var html = "<span class=\"badge badge-primary\"> new";
+		html += "</span>";
+		
+		document.getElementById("newChat").innerHTML = html;
+		
+	};
 	
 </script>

@@ -45,6 +45,7 @@ public class ChatSocketController extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String got = message.getPayload();
 		Map user = (Map)session.getAttributes().get("user");
+		
 
 		Map msg = new HashMap<>();
 		msg = gson.fromJson(got, msg.getClass());
@@ -61,16 +62,19 @@ public class ChatSocketController extends TextWebSocketHandler{
 		for(int i = 0; i<alertList.size();i++) {
 			UserList.add((String)alertList.get(i).getAttributes().get("userId"));
 		}
-		//alertList.get(j).getAttributes().get("userId")
+		
+		System.out.println("userList = " +UserList);
 		for(int i = 0; i<UserList.size();i++) {
-			if(UserList.contains(sockets.get(i).getAttributes().get("userId"))) {
+			String ids = (String)sockets.get(i).getAttributes().get("userId");
+			System.out.println(ids);
+			if(!UserList.get(i).contains(ids)) {
+				alertService.sendAll(gson.toJson(msg));
+			}else {
 				try {
 					sockets.get(i).sendMessage(messages);
 				}catch (Exception e) {
 					e.printStackTrace();
 				}				
-			}else {
-				alertService.sendAll(gson.toJson(msg));
 			}
 		}
 	}

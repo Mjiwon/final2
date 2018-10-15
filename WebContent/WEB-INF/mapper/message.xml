@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="messages">
 	<insert id="sendMessage" parameterType="java.util.HashMap">
-		insert into messages values(#{code}, #{sender}, #{receiver}, #{content},sysdate,null)
+		insert into messages values(#{code}, #{sender}, #{receiver}, #{content},to_date(sysdate,'YYYY/MM/DD HH:MI:SS'),null)
 	</insert>
 	
 	<select id="messageList" resultType="java.util.HashMap" parameterType="java.lang.String">
@@ -14,8 +14,13 @@
 		select * from(messages join employee on messages.sender=employee.id join department on employee.did=department.did  
 		join position on employee.pid=position.pid) where code = #{code}
 	</select>
+	
+	<select id="msgdetail" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from(messages join employee on messages.sender=employee.id join department on employee.did=department.did  
+		join position on employee.pid=position.pid) where code = #{code}
+	</select>
 
-	<update id="receiverDate" >
-		update messages set receiverdate = sysdate;
+	<update id="receiverDate" parameterType="java.lang.String" >
+		update messages set receivedate = to_date(sysdate,'YYYY/MM/DD HH:MI:SS') where code = #{code}
 	</update>
 </mapper>
