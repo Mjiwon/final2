@@ -63,7 +63,10 @@ public class MessageController {
 		String id = (String)wr.getAttribute("userId", WebRequest.SCOPE_SESSION);
 		param.put("sender", id);
 		
+		
 		int i = mdao.sendMessage(param);
+		
+		System.out.println(param);
 
 		String receiver = (String)param.get("receiver");
 		System.out.println("받는이 : " + receiver);

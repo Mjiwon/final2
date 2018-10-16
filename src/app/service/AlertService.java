@@ -2,6 +2,7 @@ package app.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -89,6 +90,46 @@ public class AlertService {
 				}
 				
 			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	// 아래는 선생님 코드 방에 있는사람 보내고 방없는사람들 따로보내고
+	public void sendIncludeGroup(String txt, String... targets) {
+		sendIncludeGroup(txt, Arrays.asList(targets));
+	}
+	
+	public void sendIncludeGroup(String txt,  List<String> group) {
+		TextMessage msg = new TextMessage(txt);
+		for (int i = 0; i < list.size(); i++) {
+			try {
+				WebSocketSession ws =list.get(i);
+				String userId = (String) ws.getAttributes().get("userId");
+				if(group.contains(userId)) {
+					ws.sendMessage(msg);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void sendExcludeGroup(String txt, String... targets) {
+		sendExcludeGroup(txt, Arrays.asList(targets));
+	}
+	
+	public void sendExcludeGroup(String txt, List<String> group) {
+		TextMessage msg = new TextMessage(txt);
+		for (int i = 0; i < list.size(); i++) {
+			try {
+				WebSocketSession ws =list.get(i);
+				String userId = (String) ws.getAttributes().get("userId");
+				// ws.getAttribute()  == HttpSession의 attribute 들
+				if(!group.contains(userId)) {
+					ws.sendMessage(msg);
+				}
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}

@@ -41,25 +41,10 @@
 	</div>
 	<div class="form-group">
 		<label>받는사람</label> 
+		<c:set var="resever" value="${reSend.ID }"/>
 		<input type="user" class="form-control"
-			placeholder="${reSend.NAME }${reSend.PNAME}(${reSend.ID })-${reSend.DNAME}">
-<%-- 		<select class="form-control"
-			id="exampleFormControlSelect1" name="receiver">
-			<c:forEach var="i" items="${allmember }">
-				<option value="${i.ID}">${i.NAME}${i.PNAME }(${i.ID })-${i.DNAME } </option>
-			
-			</c:forEach>
-		</select> --%>
-		<script>
-/* 			var allmember= function(){
-				var req = new XMLHttpRequest();
-				req.open("get", "${pageContext.servletContext.contextPath}/allmember.do", true);
-				req.onreadystatechange = function(){
-					if(this.readyState == 4 )
-						var obj = JSON.parser
-				}
-			} */
-		</script>
+			placeholder="${reSend.NAME }${reSend.PNAME}(${reSend.ID })-${reSend.DNAME}" value="${resever}">
+			${reSend.NAME }${reSend.PNAME}(${reSend.ID })-${reSend.DNAME}
 	</div>
 	<div class="form-group">
 		<label for="exampleFormControlTextarea1">보내는 내용</label>

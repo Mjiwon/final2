@@ -7,7 +7,7 @@
 	
 	<select id="messageList" resultType="java.util.HashMap" parameterType="java.lang.String">
 		select * from(messages join employee on messages.sender=employee.id join department on employee.did=department.did  
-		join position on employee.pid=position.pid) where receiver = #{receiver}
+		join position on employee.pid=position.pid) where receiver = #{receiver} order by senddate desc
 	</select>
 	
 	<select id="receiverMsg" parameterType="java.lang.String" resultType="java.util.HashMap">

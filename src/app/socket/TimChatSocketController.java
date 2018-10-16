@@ -43,7 +43,6 @@ public class TimChatSocketController extends TextWebSocketHandler{
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String got = message.getPayload();
-		System.out.println(got+">>>????");
 		
 		Map user = (Map)session.getAttributes().get("user");
 		
@@ -65,9 +64,7 @@ public class TimChatSocketController extends TextWebSocketHandler{
 				Map m = new HashMap<>();
 				m.put((String)mmmm.get("ID"), mmmm);
 				userList.add(m);
-				System.out.println("여긴?" + userList);
 				targets[i] = (String)mmmm.get("ID");
-				System.out.println("들ㅇ온거?" + targets[i]);
 			}
 		}
 		
@@ -75,7 +72,6 @@ public class TimChatSocketController extends TextWebSocketHandler{
 			Map u = userList.get(i);
 			Map udam = (Map)sockets.get(i).getAttributes().get("user");
 			if(!u.containsValue(udam)) {
-				System.out.println("여기는 들어오는거야 안들어는거야??" + targets[i]);
 				alertService.sendSome(gson.toJson(msg), targets[i]);
 			}else {
 				try {
