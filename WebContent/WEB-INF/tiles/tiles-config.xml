@@ -68,11 +68,11 @@
 		<put-attribute name="left" value="/WEB-INF/views/employee/employee-side.jsp" />
 		<put-attribute name="center" value="/WEB-INF/views/chat/room.jsp"/>
 	</definition>
-	
-	<definition name="guest.timRoom" template="/WEB-INF/tiles/employee-timplate.jsp">
+
+	<definition name="guest.timchat" template="/WEB-INF/tiles/employee-timplate.jsp">
 		<put-attribute name="nav" value="/WEB-INF/views/employee/employee-nav.jsp" />
 		<put-attribute name="left" value="/WEB-INF/views/employee/employee-side.jsp" />
-		<put-attribute name="center" value="/WEB-INF/views/chat/timroom.jsp"/>
+		<put-attribute name="center" value="/WEB-INF/views/chat/room.jsp"/>
 	</definition>
 
 </tiles-definitions>

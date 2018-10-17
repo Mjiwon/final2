@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <p>
 <br/>
 </p>
-<h4>Chat Room <small>(All Departments)</small></h4>
+<h4>Chat Room <small>(${chat == "timchat" ? user.DNAME : "All Departments"})</small></h4>
 <div style="height: 520px; overflow-y: scroll; " id="chatView">
 	
 </div>
@@ -23,6 +24,9 @@
 		case "public":
 			publicHandle(obj);
 			break;
+		case "timchat":
+			timChatHandle(obj);
+			break;
 		}
 	};
 	
@@ -37,12 +41,26 @@
 		html +="</div>";
 		document.getElementById("chatView").innerHTML += html;
 		document.getElementById("chatView").scrollTop = document.getElementById("chatView").scrollHeight;
+
 	};
+	
+	var timChatHandle = function(obj){
+		var txt = obj.text;
+		var name = obj.sendUser.NAME;
+		var pname = obj.sendUser.PNAME;
+		var dname = obj.sendUser.DNAME;
+		
+		var html = "<div class=\"alert alert-secondary\" role=\"alert\" style=\"padding:3px; margin-bottom:3px;\" >";
+		html += name + pname + "( "+dname+" ) : <br/>"+ obj.text;
+		html +="</div>";
+		document.getElementById("chatView").innerHTML += html;
+		document.getElementById("chatView").scrollTop = document.getElementById("chatView").scrollHeight;
+	}
 	
 	document.getElementById("input").onchange = function(){
 		console.log(this.value);
 		var msg = {
-			"mode" : "public",
+			"mode" : "${chat}",
 			"text" : this.value
 		};
 		chatws.send(JSON.stringify(msg));

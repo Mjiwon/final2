@@ -14,7 +14,6 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.google.gson.Gson;
 
-import app.controller.AlertSocketController;
 import app.service.AlertService;
 
 @Controller
@@ -43,40 +42,58 @@ public class ChatSocketController extends TextWebSocketHandler{
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+		String chatMode = (String)session.getAttributes().get("chat");
+		System.out.println("chat MODE   ---  "  + chatMode);
+		
 		String got = message.getPayload();
 		Map user = (Map)session.getAttributes().get("user");
+		String userId = (String)session.getAttributes().get("userId");
 		
-
-		Map msg = new HashMap<>();
-		msg = gson.fromJson(got, msg.getClass());
-		msg.put("sendUser", user);
-				
-		TextMessage messages = new TextMessage(gson.toJson(msg));
+		Map msguser = new HashMap<>();
+		msguser = gson.fromJson(got, Map.class);
+		msguser.put("sendUser", user);
 		
-		
-		System.out.println("messages "   + messages);
+		TextMessage messages = new TextMessage(gson.toJson(msguser));
 		
 		List<WebSocketSession> alertList = alertService.alertList();
+		
+		List<String> allUser = new ArrayList<>();
+		Map alertUserinfo = new HashMap();
 
-		List<String>UserList = new ArrayList<>();
+		List<String> groupUser = new ArrayList<>();
+		Map groupUserinfo = new HashMap();
+		
 		for(int i = 0; i<alertList.size();i++) {
-			UserList.add((String)alertList.get(i).getAttributes().get("userId"));
+			allUser.add((String)alertList.get(i).getAttributes().get("userId"));
+			alertUserinfo = (Map)alertList.get(i).getAttributes().get("user");
+		}
+
+		switch (chatMode) {
+		case "public":
+			for(int i = 0; i<allUser.size();i++) {
+				groupUser.add((String)sockets.get(i).getAttributes().get("userId"));
+				if(allUser.get(i).contains((String)sockets.get(i).getAttributes().get("userId"))) {
+					alertService.sendIncludeGroup(gson.toJson(msguser), groupUser);
+				}else {
+					alertService.sendExcludeGroup(gson.toJson(msguser), groupUser);
+				}
+			}
+			break;
+
+		case "timchat":
+			for(int i = 0; i<allUser.size();i++) {
+				
+				groupUser.add((String)sockets.get(i).getAttributes().get("userId"));
+				if(allUser.get(i).contains((String)sockets.get(i).getAttributes().get("userId"))) {
+					alertService.sendIncludeGroup(gson.toJson(msguser), groupUser);
+				}else {
+					alertService.sendExcludeGroup(gson.toJson(msguser), groupUser);
+				}
+			}
+			break;
 		}
 		
-		System.out.println("userList = " +UserList);
-		for(int i = 0; i<UserList.size();i++) {
-			String ids = (String)sockets.get(i).getAttributes().get("userId");
-			System.out.println(ids);
-			if(!UserList.get(i).contains(ids)) {
-				alertService.sendAll(gson.toJson(msg));
-			}else {
-				try {
-					sockets.get(i).sendMessage(messages);
-				}catch (Exception e) {
-					e.printStackTrace();
-				}				
-			}
-		}
+		
 	}
 	
 }
