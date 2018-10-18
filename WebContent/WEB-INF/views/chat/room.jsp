@@ -29,7 +29,7 @@
 			publicHandle(obj);
 			break;
 		case "${chat}":
-			timChatHandle(obj);
+				timChatHandle(obj);			
 			break;
 		}
 	};
@@ -42,7 +42,7 @@
 		
 		var html = "<div class=\"alert alert-secondary\" role=\"alert\" style=\"padding:3px; margin-bottom:3px;\" >";
 		html += name + pname + "( "+dname+" ) : <br/>"+ obj.text;
-		html +="</div>";
+		html +="</div>" ;
 		document.getElementById("chatView").innerHTML += html;
 		document.getElementById("chatView").scrollTop = document.getElementById("chatView").scrollHeight;
 		

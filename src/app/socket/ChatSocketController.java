@@ -42,7 +42,7 @@ public class ChatSocketController extends TextWebSocketHandler {
 
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		String chatMode = (String)session.getAttributes().get("chat");
+		String id = (String)session.getAttributes().get("userId");
 		
 		Map user = (Map)session.getAttributes().get("user");
 		
@@ -53,19 +53,21 @@ public class ChatSocketController extends TextWebSocketHandler {
 		msg.put("sendUser", user);
 		
 		TextMessage messages = new TextMessage(gson.toJson(msg));
+		String chatMode = (String)session.getAttributes().get("chat");
 		
-		List<String> groupIds = new ArrayList<>();
-		for(int i = 0 ; i<sockets.size();i++) {
-			String chat = (String)sockets.get(i).getAttributes().get("chat");
-			if(chatMode.equals(chat)) {
-				groupIds.add((String)sockets.get(i).getAttributes().get("userId"));				
-				alertService.sendIncludeGroup(gson.toJson(msg), groupIds);
-			}else {
-				alertService.sendExcludeGroup(gson.toJson(msg), groupIds);
+		
+		for(int i = 0; i<sockets.size();i++) {
+			String dchatMode = (String)sockets.get(i).getAttributes().get("chat");
+			System.out.println(dchatMode);
+			if(dchatMode.equals(chatMode)) {
+				try {
+					sockets.get(i).sendMessage(messages);
+					
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
-		
-		
 		
 		
 		
