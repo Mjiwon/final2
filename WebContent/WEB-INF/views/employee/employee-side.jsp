@@ -61,7 +61,7 @@
 		case "public" :
 			publicHandle(obj);
 			break;
-		case "timchat":
+		default : 
 			timChatHandle(obj);
 			break;
 		}

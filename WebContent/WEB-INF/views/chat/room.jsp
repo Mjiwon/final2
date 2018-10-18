@@ -4,7 +4,7 @@
 <p>
 <br/>
 </p>
-<h4>Chat Room <small>(${chat == "timchat" ? user.DNAME : "All Departments"})</small></h4>
+<h4>Chat Room <small>(${chat == 'public' ? 'All Departments' : user.DNAME})</small></h4>
 <div style="height: 520px; overflow-y: scroll; " id="chatView">
 	
 </div>
@@ -17,6 +17,10 @@
 </div>
 <script>
 	var chatws = new WebSocket("ws://"+ location.host + "${pageContext.servletContext.contextPath}/chat.do");
+	chatws.onerror = function(event) {
+		  console.error("WebSocket error observed:", event);
+	};
+	
 	chatws.onmessage = function(evt){
 		console.log(evt.data);
 		var obj = JSON.parse(evt.data);
@@ -24,7 +28,7 @@
 		case "public":
 			publicHandle(obj);
 			break;
-		case "timchat":
+		case "${chat}":
 			timChatHandle(obj);
 			break;
 		}
@@ -41,7 +45,7 @@
 		html +="</div>";
 		document.getElementById("chatView").innerHTML += html;
 		document.getElementById("chatView").scrollTop = document.getElementById("chatView").scrollHeight;
-
+		
 	};
 	
 	var timChatHandle = function(obj){
@@ -58,7 +62,7 @@
 	}
 	
 	document.getElementById("input").onchange = function(){
-		console.log(this.value);
+		// console.log(this.value);
 		var msg = {
 			"mode" : "${chat}",
 			"text" : this.value

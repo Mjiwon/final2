@@ -1,5 +1,7 @@
 package app.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
@@ -16,7 +18,9 @@ public class ChatController {
 	
 	@RequestMapping("/timRoom.do")
 	public String chatTimRoomHandler(WebRequest wr) {
-		wr.setAttribute("chat", "timchat", WebRequest.SCOPE_SESSION);
+		Map map = (Map)wr.getAttribute("user", WebRequest.SCOPE_SESSION);
+		
+		wr.setAttribute("chat", ""+map.get("DID"), WebRequest.SCOPE_SESSION);
 		return "guest.timchat";
 	}
 	
