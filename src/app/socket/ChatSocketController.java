@@ -48,26 +48,46 @@ public class ChatSocketController extends TextWebSocketHandler {
 		
 		String got = message.getPayload();
 		
+		String chatMode = (String)session.getAttributes().get("chat");
+
 		Map msg = new HashMap<>();
 		msg = gson.fromJson(got, Map.class);
 		msg.put("sendUser", user);
+		msg.put("mode", chatMode);
+		
+		System.out.println("sendUser = >" + msg);
 		
 		TextMessage messages = new TextMessage(gson.toJson(msg));
-		String chatMode = (String)session.getAttributes().get("chat");
-		
-		
-		for(int i = 0; i<sockets.size();i++) {
+		System.out.println("나의모드으~~ "+chatMode);
+      	List<String> groupInIds = new ArrayList<>( );
+
+      	for(int i = 0; i<sockets.size();i++) {
+			String ids = (String)sockets.get(i).getAttributes().get("userId");
+			System.out.println("ids ssss = "+ ids);
+			
 			String dchatMode = (String)sockets.get(i).getAttributes().get("chat");
-			System.out.println(dchatMode);
+			System.out.println("너의(socket) 모드는?? " + dchatMode);
+			
 			if(dchatMode.equals(chatMode)) {
 				try {
 					sockets.get(i).sendMessage(messages);
-					
+					for(int j = 0 ; j <alertService.alertList().size();j++) {
+						groupInIds.add(id);
+					}					
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
+			}else{
+				System.out.println("emfdhk??");
+				for(int j = 0 ; j <alertService.alertList().size();j++) {
+					groupInIds.add(id);
+				}	
 			}
+			System.out.println("구릅리스드 : " + groupInIds);
 		}
+		
+		/*String json ="{\"mode\":\""+chatMode+"\"}";*/
+		alertService.sendExcludeGroup(gson.toJson(msg), groupInIds);
 		
 		
 		
