@@ -134,4 +134,23 @@ public class AlertService {
 			}
 		}
 	}
+	public void sendExcludeGroup(String txt, List<String> group, String did) {
+		TextMessage msg = new TextMessage(txt);
+		for (int i = 0; i < list.size(); i++) {
+			try {
+				WebSocketSession ws =list.get(i);
+				String userId = (String) ws.getAttributes().get("userId");
+				Map user = (Map)ws.getAttributes().get("user");
+				String dids = (String)user.get("DID");
+				// ws.getAttribute()  == HttpSession의 attribute 들
+				if(!group.contains(userId)) {
+					if(dids.equals(did)) {
+						ws.sendMessage(msg);						
+					}
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

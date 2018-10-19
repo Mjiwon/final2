@@ -43,8 +43,9 @@ public class ChatSocketController extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		String id = (String)session.getAttributes().get("userId");
-		
 		Map user = (Map)session.getAttributes().get("user");
+		String did = (String)user.get("DID");
+		
 		
 		String got = message.getPayload();
 		
@@ -71,23 +72,24 @@ public class ChatSocketController extends TextWebSocketHandler {
 			if(dchatMode.equals(chatMode)) {
 				try {
 					sockets.get(i).sendMessage(messages);
-					for(int j = 0 ; j <alertService.alertList().size();j++) {
-						groupInIds.add(id);
-					}					
+					groupInIds.add(id);					
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
 			}else{
 				System.out.println("emfdhk??");
-				for(int j = 0 ; j <alertService.alertList().size();j++) {
-					groupInIds.add(id);
-				}	
+				groupInIds.add(id);
+
 			}
 			System.out.println("구릅리스드 : " + groupInIds);
 		}
 		
 		/*String json ="{\"mode\":\""+chatMode+"\"}";*/
-		alertService.sendExcludeGroup(gson.toJson(msg), groupInIds);
+      	if(chatMode.equals("public")) {
+      		alertService.sendExcludeGroup(gson.toJson(msg), groupInIds);
+      	}else {
+      		alertService.sendExcludeGroup(gson.toJson(msg), groupInIds, did);      		
+      	}
 		
 		
 		
